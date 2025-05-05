@@ -7,7 +7,7 @@ const WelcomeWindow = () => {
         <h1 className="text-3xl font-medium mb-4 text-gray-900">Welcome to thrive store</h1>
         
         <div className="my-8 flex justify-center">
-          <img alt="Brand Featured" src="/lovable-uploads/3296e2f2-6222-4867-87f0-6ff31a701ac0.png" className="w-54 h-54 rounded-lg shadow-md object-cover" />
+          <img alt="Brand Featured" src="/lovable-uploads/3296e2f2-6222-4867-87f0-6ff31a701ac0.png" className="w-10 h-10 rounded-lg shadow-md object-cover" />
         </div>
         
         <p className="text-lg text-gray-600 mb-8">For the past two years, I've been on a journey designing clothes to sparkle vision across the world with unique creations across the world with thrive store clothing. Like a digital experience in a new kind of web3 fashion.</p>
