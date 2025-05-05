@@ -1,41 +1,48 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ExternalLink } from 'lucide-react';
+import { toast } from "sonner";
+
 const ContactWindow = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Form submission logic would go here
-    alert('Message sent! (This is a demo)');
+    toast.success('Message sent! We will get back to you soon.');
     setFormData({
       name: '',
       email: '',
       message: ''
     });
   };
-  return <div className="h-full overflow-auto p-6 bg-white">
+  
+  return (
+    <div className="h-full overflow-auto p-6 bg-white">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
           <img src="/lovable-uploads/7b41f825-fde2-4b14-9a26-12f532c4be3f.png" alt="THRIVE Logo" className="h-6 w-6" />
-          <h2 className="text-xl font-medium text-gray-900">Contact THR!VE Store</h2>
+          <h2 className="text-xl font-medium text-gray-900">Contact THRIVE Store</h2>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-gray-50 p-6 rounded-xl">
             <h3 className="text-lg font-medium mb-4 text-gray-900">Get in Touch</h3>
             <p className="text-gray-600 mb-6">
-              Have questions about our products or interested in collaborating? 
+              Have questions about our products or interested in our print on demand services? 
               Fill out the form and our team will get back to you shortly.
             </p>
             
@@ -46,7 +53,7 @@ const ContactWindow = () => {
                 </div>
                 <div>
                   <div className="text-xs text-gray-500">Email</div>
-                  <div className="text-sm text-gray-700 rounded-full px-[7px] my-0 py-0 mx-0">thrive.store.clothing@gmail.com</div>
+                  <div className="text-sm text-gray-700">thrive.store.clothing@gmail.com</div>
                 </div>
               </div>
               
@@ -56,7 +63,7 @@ const ContactWindow = () => {
                 </div>
                 <div>
                   <div className="text-xs text-gray-500">Phone</div>
-                  <div className="text-sm text-gray-700">+91 763894003</div>
+                  <div className="text-sm text-gray-700">+91 7644894003</div>
                 </div>
               </div>
               
@@ -66,7 +73,7 @@ const ContactWindow = () => {
                 </div>
                 <div>
                   <div className="text-xs text-gray-500">Location</div>
-                  <div className="text-sm text-gray-700">Bangalore , India , Earth</div>
+                  <div className="text-sm text-gray-700">Bangalore, India, Earth</div>
                 </div>
               </div>
             </div>
@@ -120,6 +127,8 @@ const ContactWindow = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default ContactWindow;

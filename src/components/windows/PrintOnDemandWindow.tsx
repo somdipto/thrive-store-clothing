@@ -1,8 +1,52 @@
 
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Printer, Check, Image, Package } from 'lucide-react';
+import { Printer, Check, Image, Upload, Send } from 'lucide-react';
+import { toast } from "sonner";
 
 const PrintOnDemandWindow = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [designName, setDesignName] = useState('');
+  const [designDescription, setDesignDescription] = useState('');
+  
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedFile) {
+      toast.error('Please select a design file');
+      return;
+    }
+    
+    const phoneNumber = '917644894003'; // WhatsApp number format
+    const message = encodeURIComponent(
+      `Hello! I'd like to place a print-on-demand order.\n\nDesign Name: ${designName}\n\nDescription: ${designDescription}\n\nI've uploaded my design and would like to discuss further details.`
+    );
+    
+    // Open WhatsApp with pre-filled message
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    
+    toast.success('Redirecting to WhatsApp to discuss your design!');
+  };
+  
+  const resetForm = () => {
+    setSelectedFile(null);
+    setPreview(null);
+    setDesignName('');
+    setDesignDescription('');
+  };
+
   return (
     <div className="h-full overflow-auto py-6 px-8 bg-white text-gray-900">
       <header className="mb-8">
@@ -32,55 +76,100 @@ const PrintOnDemandWindow = () => {
           </div>
           
           <div className="p-6">
-            <h3 className="text-lg font-medium mb-4">Our Process</h3>
+            <h3 className="text-lg font-medium mb-4">Upload Your Design</h3>
             
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
-                  <span className="text-sm font-medium">1</span>
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                {preview ? (
+                  <div className="space-y-4">
+                    <img 
+                      src={preview} 
+                      alt="Design Preview" 
+                      className="max-h-48 mx-auto object-contain"
+                    />
+                    <Button 
+                      type="button" 
+                      variant="outline" 
+                      onClick={() => setPreview(null)}
+                      className="text-sm"
+                    >
+                      Change Image
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="flex justify-center">
+                      <Upload className="h-10 w-10 text-gray-400" />
+                    </div>
+                    <p className="text-gray-600">Drag and drop your design file, or</p>
+                    <label className="inline-block">
+                      <span className="bg-black text-white px-4 py-2 rounded-md cursor-pointer hover:bg-gray-800 text-sm">
+                        Browse Files
+                      </span>
+                      <input 
+                        type="file" 
+                        className="hidden" 
+                        accept="image/*" 
+                        onChange={handleFileChange}
+                      />
+                    </label>
+                    <p className="text-xs text-gray-500 mt-2">
+                      Supported formats: PNG, JPG, SVG, PDF (max 10MB)
+                    </p>
+                  </div>
+                )}
+              </div>
+              
+              <div className="space-y-4">
                 <div>
-                  <h4 className="font-medium text-gray-900">Design Upload</h4>
-                  <p className="text-sm text-gray-600 mt-1">Upload your artwork or work with our design team to create something unique.</p>
+                  <label htmlFor="designName" className="block text-sm font-medium text-gray-700 mb-1">
+                    Design Name
+                  </label>
+                  <input
+                    type="text"
+                    id="designName"
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+                    placeholder="Enter a name for your design"
+                    value={designName}
+                    onChange={(e) => setDesignName(e.target.value)}
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    rows={3}
+                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm resize-none"
+                    placeholder="Describe your design and any special requirements"
+                    value={designDescription}
+                    onChange={(e) => setDesignDescription(e.target.value)}
+                  ></textarea>
                 </div>
               </div>
               
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
-                  <span className="text-sm font-medium">2</span>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900">Product Selection</h4>
-                  <p className="text-sm text-gray-600 mt-1">Choose from our premium garment selection - tees, hoodies, hats, and more.</p>
-                </div>
+              <div className="pt-2 flex gap-3">
+                <Button 
+                  type="submit" 
+                  className="bg-black hover:bg-gray-800 text-white rounded-full flex items-center gap-2"
+                  disabled={!selectedFile}
+                >
+                  <Send className="h-4 w-4" />
+                  Send to WhatsApp
+                </Button>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  onClick={resetForm}
+                  className="rounded-full"
+                >
+                  Reset
+                </Button>
               </div>
-              
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
-                  <span className="text-sm font-medium">3</span>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900">Production</h4>
-                  <p className="text-sm text-gray-600 mt-1">We handle printing, quality control, and inventory management.</p>
-                </div>
-              </div>
-              
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center">
-                  <span className="text-sm font-medium">4</span>
-                </div>
-                <div>
-                  <h4 className="font-medium text-gray-900">Shipping & Fulfillment</h4>
-                  <p className="text-sm text-gray-600 mt-1">We ship directly to your customers with your custom packaging.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-6">
-              <Button className="bg-black hover:bg-gray-800 text-white rounded-full">
-                Start Your Custom Order
-              </Button>
-            </div>
+            </form>
           </div>
         </div>
         
@@ -117,7 +206,7 @@ const PrintOnDemandWindow = () => {
             <div className="flex items-center justify-center mb-4">
               <img 
                 src="/lovable-uploads/7b41f825-fde2-4b14-9a26-12f532c4be3f.png" 
-                alt="PIXEL CHIC Logo" 
+                alt="THRIVE Logo" 
                 className="h-10 w-10"
               />
             </div>

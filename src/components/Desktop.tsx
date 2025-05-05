@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Taskbar from './Taskbar';
 import WindowManager from './WindowManager';
 import DesktopIcons from './DesktopIcons';
+import { Toaster } from "sonner";
 
 export type WindowType = {
   id: string;
@@ -99,6 +100,14 @@ const Desktop = () => {
     }));
   };
 
+  const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const currentDate = new Date().toLocaleDateString('en-US', { 
+    weekday: 'long', 
+    month: 'long', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+
   return (
     <div className="h-screen w-screen bg-[#242424] overflow-hidden flex flex-col">
       <div className="h-7 bg-[#1A1A1A] flex items-center justify-between px-4 text-white text-xs">
@@ -108,17 +117,16 @@ const Desktop = () => {
             alt="THRIVE Logo" 
             className="h-4 w-4" 
           />
-          <span>PIXEL CHIC</span>
+          <span>THRIVE Store</span>
           <span>Shop</span>
           <span>Contact</span>
           <span>Help</span>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1">
-            <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
-            <div className="h-2 w-2 bg-gray-500 rounded-full"></div>
+          <div className="flex items-center gap-2">
+            <span className="text-gray-400">Bangalore, India, Earth</span>
           </div>
-          <span>Monday, May 5, 2025 12:43 PM</span>
+          <span>{currentDate} {currentTime}</span>
         </div>
       </div>
       <div className="flex-1 relative">
@@ -130,6 +138,7 @@ const Desktop = () => {
           resizeWindow={resizeWindow} 
           toggleWindow={toggleWindow} 
         />
+        <Toaster position="top-right" />
       </div>
       <Taskbar windows={windows} toggleWindow={toggleWindow} />
     </div>

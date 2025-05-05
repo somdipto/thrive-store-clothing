@@ -125,13 +125,16 @@ const WindowManager = ({ windows, bringToFront, moveWindow, resizeWindow, toggle
             onMouseDown={(e) => handleMouseDown(e, window.id)}
           >
             <div className="flex items-center gap-1.5 ml-1">
-              <div className="h-3 w-3 bg-[#ff5f57] rounded-full hover:bg-red-500 cursor-pointer"
+              <div 
+                id={`${window.id}-window-button`}
+                className="h-3 w-3 bg-[#ff5f57] rounded-full hover:bg-red-500 cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleWindow(window.id);
                 }}
               ></div>
-              <div className="h-3 w-3 bg-[#febc2e] rounded-full hover:bg-yellow-500 cursor-pointer"
+              <div 
+                className="h-3 w-3 bg-[#febc2e] rounded-full hover:bg-yellow-500 cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleMinimize(window.id);
@@ -143,7 +146,7 @@ const WindowManager = ({ windows, bringToFront, moveWindow, resizeWindow, toggle
               {window.title}
             </div>
           </div>
-          <div className={`flex-1 overflow-auto bg-white p-4 ${isMinimized[window.id] ? 'hidden' : ''}`}>
+          <div className={`flex-1 overflow-auto bg-white ${isMinimized[window.id] ? 'hidden' : ''}`}>
             {getWindowContent(window.content)}
           </div>
           {!isMinimized[window.id] && (
