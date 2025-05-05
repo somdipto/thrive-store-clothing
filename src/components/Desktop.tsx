@@ -52,6 +52,24 @@ const Desktop = () => {
       position: { x: 200, y: 200 },
       size: { width: 500, height: 400 },
     },
+    {
+      id: 'printOnDemand',
+      title: 'Print On Demand',
+      content: 'printOnDemand',
+      isOpen: false,
+      zIndex: 0,
+      position: { x: 250, y: 250 },
+      size: { width: 600, height: 480 },
+    },
+    {
+      id: 'nftClothing',
+      title: 'NFT Clothing',
+      content: 'nftClothing',
+      isOpen: false,
+      zIndex: 0,
+      position: { x: 300, y: 300 },
+      size: { width: 650, height: 520 },
+    },
   ]);
 
   const toggleWindow = (id: string) => {

@@ -5,6 +5,8 @@ import WelcomeWindow from './windows/WelcomeWindow';
 import ShopWindow from './windows/ShopWindow';
 import LookbookWindow from './windows/LookbookWindow';
 import ContactWindow from './windows/ContactWindow';
+import PrintOnDemandWindow from './windows/PrintOnDemandWindow';
+import NFTClothingWindow from './windows/NFTClothingWindow';
 
 interface WindowManagerProps {
   windows: WindowType[];
@@ -32,6 +34,10 @@ const WindowManager = ({ windows, bringToFront, moveWindow, resizeWindow, toggle
         return <LookbookWindow />;
       case 'contact':
         return <ContactWindow />;
+      case 'printOnDemand':
+        return <PrintOnDemandWindow />;
+      case 'nftClothing':
+        return <NFTClothingWindow />;
       default:
         return <div>Window content not found</div>;
     }

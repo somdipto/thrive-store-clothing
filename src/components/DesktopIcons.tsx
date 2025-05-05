@@ -12,6 +12,8 @@ const DesktopIcons = ({ windows, toggleWindow }: DesktopIconsProps) => {
     { id: 'shop', label: 'Shop', icon: 'M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z' },
     { id: 'lookbook', label: 'Lookbook', icon: 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z' },
     { id: 'contact', label: 'Contact', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+    { id: 'printOnDemand', label: 'Print On Demand', icon: 'M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z' },
+    { id: 'nftClothing', label: 'NFT Clothing', icon: 'M7 20l4-16m2 16l4-16M6 9h14M4 15h14' },
   ];
 
   return (
@@ -23,12 +25,12 @@ const DesktopIcons = ({ windows, toggleWindow }: DesktopIconsProps) => {
           onClick={() => toggleWindow(icon.id)}
           onDoubleClick={() => toggleWindow(icon.id)}
         >
-          <div className="w-12 h-12 bg-gray-800 rounded-md flex items-center justify-center group-hover:bg-gray-700">
+          <div className="w-12 h-12 bg-gray-800 rounded-md flex items-center justify-center group-hover:bg-gray-700 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={icon.icon} />
             </svg>
           </div>
-          <span className="mt-1 text-sm text-white bg-gray-800 px-2 rounded group-hover:bg-gray-700">
+          <span className="mt-1 text-sm text-white bg-gray-800 px-2 rounded group-hover:bg-gray-700 transition-colors">
             {icon.label}
           </span>
         </div>
