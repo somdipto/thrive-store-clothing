@@ -46,7 +46,7 @@ const ContactWindow = () => {
                 </div>
                 <div>
                   <div className="text-xs text-gray-500">Email</div>
-                  <div className="text-sm text-gray-700">hello@pixelchic.com</div>
+                  <div className="text-sm text-gray-700">thrive.store.clothing@gmail.com</div>
                 </div>
               </div>
               
@@ -56,7 +56,7 @@ const ContactWindow = () => {
                 </div>
                 <div>
                   <div className="text-xs text-gray-500">Phone</div>
-                  <div className="text-sm text-gray-700">+1 (555) 123-4567</div>
+                  <div className="text-sm text-gray-700">+91 763894003</div>
                 </div>
               </div>
               
@@ -66,7 +66,7 @@ const ContactWindow = () => {
                 </div>
                 <div>
                   <div className="text-xs text-gray-500">Location</div>
-                  <div className="text-sm text-gray-700">San Francisco, CA</div>
+                  <div className="text-sm text-gray-700">Bangalore , India , Earth</div>
                 </div>
               </div>
             </div>
