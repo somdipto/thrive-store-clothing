@@ -46,7 +46,7 @@ const ContactWindow = () => {
                 </div>
                 <div>
                   <div className="text-xs text-gray-500">Email</div>
-                  <div className="text-sm text-gray-700">thrive.store.clothing@gmail.com</div>
+                  <div className="text-sm text-gray-700 rounded-full px-[7px] my-0 py-0 mx-0">thrive.store.clothing@gmail.com</div>
                 </div>
               </div>
               
