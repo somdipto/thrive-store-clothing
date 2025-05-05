@@ -1,6 +1,6 @@
 
 import { WindowType } from './Desktop';
-import { ShoppingCart, Printer, Contact } from 'lucide-react';
+import { ShoppingCart, Printer, Contact, FileText } from 'lucide-react';
 
 interface TaskbarProps {
   windows: WindowType[];
@@ -13,14 +13,16 @@ const Taskbar = ({ windows, toggleWindow }: TaskbarProps) => {
   const getWindowIcon = (id: string) => {
     switch(id) {
       case 'shop':
-        return <ShoppingCart className="h-5 w-5 text-white" />;
+        return <ShoppingCart className="h-5 w-5" />;
       case 'printOnDemand':
-        return <Printer className="h-5 w-5 text-white" />;
+        return <Printer className="h-5 w-5" />;
       case 'contact':
-        return <Contact className="h-5 w-5 text-white" />;
+        return <Contact className="h-5 w-5" />;
+      case 'nftClothing':
+        return <FileText className="h-5 w-5" />;
       default:
         return (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
           </svg>
         );
@@ -28,33 +30,20 @@ const Taskbar = ({ windows, toggleWindow }: TaskbarProps) => {
   };
   
   return (
-    <div className="h-12 bg-black border-t border-gray-800 flex items-center px-2 justify-between">
-      <div className="flex items-center space-x-1">
-        <button 
-          className="h-10 w-10 flex items-center justify-center rounded hover:bg-gray-800"
-          onClick={() => toggleWindow('welcome')}
-        >
-          <img 
-            src="/lovable-uploads/7b41f825-fde2-4b14-9a26-12f532c4be3f.png" 
-            alt="THRIVE Logo" 
-            className="h-6 w-6" 
-          />
-        </button>
-        
-        {windows.filter(window => window.isOpen).map(window => (
+    <div className="h-14 bg-[#242424]/80 backdrop-blur-sm flex items-center px-3 justify-center">
+      <div className="flex items-center gap-2 bg-[#1A1A1A]/70 rounded-lg h-10 px-1">
+        {windows.map(window => (
           <button 
             key={window.id} 
-            className="h-10 px-3 flex items-center gap-2 rounded bg-gray-800 text-white text-sm"
+            className={`h-9 w-9 flex items-center justify-center rounded-lg transition-colors ${window.isOpen ? 'bg-gray-600/50' : 'hover:bg-gray-700/40'}`}
             onClick={() => toggleWindow(window.id)}
+            title={window.title}
           >
-            {getWindowIcon(window.id)}
-            <span className="hidden sm:inline">{window.title}</span>
+            <div className="text-white">
+              {getWindowIcon(window.id)}
+            </div>
           </button>
         ))}
-      </div>
-      
-      <div className="text-white text-sm bg-gray-800 px-3 py-1 rounded">
-        {currentTime}
       </div>
     </div>
   );

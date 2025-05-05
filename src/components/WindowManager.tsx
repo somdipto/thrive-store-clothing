@@ -1,12 +1,12 @@
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { WindowType } from './Desktop';
 import WelcomeWindow from './windows/WelcomeWindow';
 import ShopWindow from './windows/ShopWindow';
-import LookbookWindow from './windows/LookbookWindow';
 import ContactWindow from './windows/ContactWindow';
 import PrintOnDemandWindow from './windows/PrintOnDemandWindow';
 import NFTClothingWindow from './windows/NFTClothingWindow';
+import { X, Minus, ChevronsUpDown } from 'lucide-react';
 
 interface WindowManagerProps {
   windows: WindowType[];
@@ -23,6 +23,7 @@ const WindowManager = ({ windows, bringToFront, moveWindow, resizeWindow, toggle
   const [initialSize, setInitialSize] = useState({ width: 0, height: 0 });
   const [initialPosition, setInitialPosition] = useState({ x: 0, y: 0 });
   const [initialMousePos, setInitialMousePos] = useState({ x: 0, y: 0 });
+  const [isMinimized, setIsMinimized] = useState<Record<string, boolean>>({});
 
   const getWindowContent = (contentType: string) => {
     switch (contentType) {
@@ -30,8 +31,6 @@ const WindowManager = ({ windows, bringToFront, moveWindow, resizeWindow, toggle
         return <WelcomeWindow />;
       case 'shop':
         return <ShopWindow />;
-      case 'lookbook':
-        return <LookbookWindow />;
       case 'contact':
         return <ContactWindow />;
       case 'printOnDemand':
@@ -96,6 +95,10 @@ const WindowManager = ({ windows, bringToFront, moveWindow, resizeWindow, toggle
     setResizing(null);
   };
 
+  const toggleMinimize = (id: string) => {
+    setIsMinimized(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
   return (
     <div 
       className="absolute top-0 left-0 w-full h-full"
@@ -106,42 +109,53 @@ const WindowManager = ({ windows, bringToFront, moveWindow, resizeWindow, toggle
       {windows.filter(window => window.isOpen).map(window => (
         <div 
           key={window.id}
-          className="absolute bg-gray-800 border border-gray-700 rounded shadow-lg overflow-hidden flex flex-col"
+          className="absolute bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden flex flex-col"
           style={{
             left: `${window.position.x}px`,
             top: `${window.position.y}px`,
             width: `${window.size.width}px`,
-            height: `${window.size.height}px`,
-            zIndex: window.zIndex
+            height: isMinimized[window.id] ? '32px' : `${window.size.height}px`,
+            zIndex: window.zIndex,
+            transition: 'height 0.2s ease'
           }}
+          onClick={() => bringToFront(window.id)}
         >
           <div 
-            className="bg-gray-800 h-8 flex items-center justify-between px-2 cursor-move"
+            className="bg-[#f6f6f6] h-8 flex items-center justify-between px-2 cursor-move border-b border-gray-200"
             onMouseDown={(e) => handleMouseDown(e, window.id)}
           >
-            <div className="text-white font-medium">{window.title}</div>
-            <div className="flex items-center space-x-1">
-              <button 
-                className="h-5 w-5 flex items-center justify-center rounded-full hover:bg-gray-700 text-white"
-                onClick={() => toggleWindow(window.id)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+            <div className="flex items-center gap-1.5 ml-1">
+              <div className="h-3 w-3 bg-[#ff5f57] rounded-full hover:bg-red-500 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleWindow(window.id);
+                }}
+              ></div>
+              <div className="h-3 w-3 bg-[#febc2e] rounded-full hover:bg-yellow-500 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleMinimize(window.id);
+                }}
+              ></div>
+              <div className="h-3 w-3 bg-[#28c840] rounded-full hover:bg-green-600 cursor-pointer"></div>
+            </div>
+            <div className="text-gray-700 text-sm font-medium absolute left-1/2 transform -translate-x-1/2">
+              {window.title}
             </div>
           </div>
-          <div className="flex-1 overflow-auto bg-white p-4">
+          <div className={`flex-1 overflow-auto bg-white p-4 ${isMinimized[window.id] ? 'hidden' : ''}`}>
             {getWindowContent(window.content)}
           </div>
-          <div 
-            className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize"
-            onMouseDown={(e) => handleResizeMouseDown(e, window.id)}
-          >
-            <svg className="text-gray-400 h-4 w-4" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M11 9h1v1h-1v-1zm2-5h1v1h-1V4zm-2 3h1v1h-1V7zm2-3h1v1h-1V4zm-2 3h1v1h-1V7zm2 0h1v1h-1V7zM8 4h1v1H8V4zm2 0h1v1h-1V4zM8 7h1v1H8V7zm2-3h1v1h-1V4zm-2 3h1v1H8V7zm2 0h1v1h-1V7z" />
-            </svg>
-          </div>
+          {!isMinimized[window.id] && (
+            <div 
+              className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize"
+              onMouseDown={(e) => handleResizeMouseDown(e, window.id)}
+            >
+              <svg className="text-gray-400 h-4 w-4" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M11 9h1v1h-1v-1zm2-5h1v1h-1V4zm-2 3h1v1h-1V7zm2-3h1v1h-1V4zm-2 3h1v1h-1V7zm2 0h1v1h-1V7zM8 4h1v1H8V4zm2 0h1v1h-1V4zM8 7h1v1H8V7zm2-3h1v1h-1V4zm-2 3h1v1H8V7zm2 0h1v1h-1V7z" />
+              </svg>
+            </div>
+          )}
         </div>
       ))}
     </div>

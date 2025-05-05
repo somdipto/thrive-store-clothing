@@ -1,138 +1,119 @@
 
 import { Button } from '@/components/ui/button';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { FileText, Link, Wallet } from 'lucide-react';
 
 const NFTClothingWindow = () => {
-  const nftCollections = [
-    {
-      id: 1,
-      name: "PIXEL REBELS",
-      description: "Limited edition physical tees with embedded NFTs that unlock exclusive metaverse wearables",
-      image: "/placeholder.svg",
-      price: "0.25 ETH",
-      available: 24,
-      total: 100
-    },
-    {
-      id: 2,
-      name: "DIGITAL COUTURE",
-      description: "High fashion pieces that exist in both physical and digital realms, authenticated on blockchain",
-      image: "/placeholder.svg",
-      price: "0.4 ETH",
-      available: 7,
-      total: 50
-    },
-    {
-      id: 3,
-      name: "META STREETWEAR",
-      description: "Streetwear essentials with AR capabilities, scan to see animations come alive",
-      image: "/placeholder.svg",
-      price: "0.15 ETH",
-      available: 31,
-      total: 75
-    },
-  ];
-
   return (
-    <div className="h-full overflow-auto bg-gray-100 text-black">
+    <div className="h-full overflow-auto bg-black text-white">
       {/* Hero section */}
-      <div className="relative h-60 bg-black overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent z-10"></div>
-        <img 
-          src="/placeholder.svg" 
-          alt="NFT Clothing" 
-          className="absolute w-full h-full object-cover opacity-50"
-        />
-        <div className="relative z-10 h-full flex flex-col justify-center px-8">
-          <h2 className="text-4xl font-bold text-white">NFT CLOTHING</h2>
-          <div className="h-1 w-24 bg-white my-4"></div>
-          <p className="text-gray-300 max-w-md">
-            Phygital fashion pieces with blockchain verification. 
-            Own the physical garment and its digital twin.
+      <div className="p-8 relative flex flex-col justify-center">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
+          <img 
+            src="/lovable-uploads/107cf10d-39fe-4b58-9a56-60e3bfa82564.png" 
+            alt="NFT Clothing" 
+            className="w-full h-full object-cover opacity-30"
+          />
+        </div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-10 w-10 bg-white rounded-full flex items-center justify-center">
+              <FileText className="h-5 w-5 text-black" />
+            </div>
+            <h2 className="text-2xl font-medium">NFT CLOTHING</h2>
+          </div>
+          
+          <div className="max-w-lg mb-6">
+            <h3 className="text-lg text-gray-300">COMING SOON</h3>
+            <p className="text-gray-300 mt-2">
+              The future of fashion is here. Blockchain-authenticated garments with digital twins for the metaverse.
+            </p>
+          </div>
+          
+          <div className="flex gap-4">
+            <Button className="bg-white text-black hover:bg-gray-200 rounded-full">
+              Join Waitlist
+            </Button>
+            <Button variant="outline" className="text-white border-white hover:bg-white/10 rounded-full">
+              Learn More
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Features */}
+      <div className="grid grid-cols-1 md:grid-cols-3 p-8 gap-6">
+        <div className="bg-gray-900 rounded-xl p-6">
+          <div className="h-10 w-10 bg-white/10 rounded-lg flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium mb-2">Authenticated Ownership</h3>
+          <p className="text-gray-400 text-sm">
+            Each physical garment includes an NFC chip linking to its digital certificate on the blockchain.
+          </p>
+        </div>
+        
+        <div className="bg-gray-900 rounded-xl p-6">
+          <div className="h-10 w-10 bg-white/10 rounded-lg flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium mb-2">Digital Twins</h3>
+          <p className="text-gray-400 text-sm">
+            Wear your physical garments' digital twins in compatible metaverse platforms and games.
+          </p>
+        </div>
+        
+        <div className="bg-gray-900 rounded-xl p-6">
+          <div className="h-10 w-10 bg-white/10 rounded-lg flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 className="text-lg font-medium mb-2">Exclusive Community</h3>
+          <p className="text-gray-400 text-sm">
+            NFT holders gain access to exclusive events, future drops, and our creator community.
           </p>
         </div>
       </div>
-
-      {/* Main content */}
+      
+      {/* Newsletter signup */}
       <div className="p-8">
-        {/* What is NFT Clothing */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold mb-4">What is NFT Clothing?</h3>
-          <p className="text-gray-700 mb-6">
-            Our NFT clothing collection merges physical garments with digital ownership on the blockchain.
-            Each piece comes with a unique NFT that proves authenticity, grants digital wearables for the metaverse,
-            and provides exclusive access to future drops and events.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="h-10 w-10 bg-black text-white flex items-center justify-center font-bold rounded-full mb-4">1</div>
-              <h4 className="font-bold mb-2">Authenticated Ownership</h4>
-              <p className="text-sm text-gray-600">Each physical piece is linked to an NFT on the Ethereum blockchain, providing proof of authenticity and ownership</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="h-10 w-10 bg-black text-white flex items-center justify-center font-bold rounded-full mb-4">2</div>
-              <h4 className="font-bold mb-2">Digital Twins</h4>
-              <p className="text-sm text-gray-600">Your purchase includes digital wearables for use across supported metaverse platforms</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="h-10 w-10 bg-black text-white flex items-center justify-center font-bold rounded-full mb-4">3</div>
-              <h4 className="font-bold mb-2">Community Access</h4>
-              <p className="text-sm text-gray-600">NFT holders gain access to exclusive events, future drops, and our creator community</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Collections Carousel */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold mb-6">Featured Collections</h3>
-          <Carousel className="w-full max-w-4xl mx-auto">
-            <CarouselContent>
-              {nftCollections.map((collection) => (
-                <CarouselItem key={collection.id} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-white rounded-lg overflow-hidden shadow-sm h-full">
-                    <div className="aspect-square bg-gray-200 relative">
-                      <img 
-                        src={collection.image} 
-                        alt={collection.name} 
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute top-2 right-2 bg-black text-white text-xs px-2 py-1 rounded">
-                        {collection.available}/{collection.total}
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h4 className="font-bold text-lg">{collection.name}</h4>
-                      <p className="text-sm text-gray-600 line-clamp-2 mb-3">{collection.description}</p>
-                      <div className="flex justify-between items-center">
-                        <span className="font-mono font-bold">{collection.price}</span>
-                        <Button variant="outline" className="text-xs border-black hover:bg-black hover:text-white">
-                          View Collection
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
-          </Carousel>
-        </div>
-
-        {/* Connect Wallet CTA */}
-        <div className="bg-black text-white p-8 rounded-lg flex flex-col md:flex-row items-center justify-between">
+        <div className="bg-gray-900 rounded-xl p-6 flex flex-col md:flex-row gap-6 items-center justify-between">
           <div>
-            <h3 className="text-2xl font-bold mb-2">Ready to collect?</h3>
-            <p className="text-gray-300 max-w-md">Connect your wallet to purchase our NFT clothing pieces or view your collection</p>
+            <h3 className="text-xl font-medium mb-2">Get Early Access</h3>
+            <p className="text-gray-400">
+              Join our waitlist to be notified when our NFT clothing line launches.
+            </p>
           </div>
-          <Button className="mt-4 md:mt-0 bg-white text-black hover:bg-gray-200">
-            CONNECT WALLET
+          
+          <div className="flex gap-3">
+            <input 
+              type="email" 
+              placeholder="Your email" 
+              className="px-4 py-2 rounded-full bg-black text-white border border-gray-800 focus:outline-none focus:ring-1 focus:ring-white"
+            />
+            <Button className="bg-white text-black hover:bg-gray-200 rounded-full whitespace-nowrap">
+              Join Waitlist
+            </Button>
+          </div>
+        </div>
+      </div>
+      
+      {/* Connect wallet CTA */}
+      <div className="p-8 pt-0">
+        <div className="bg-gradient-to-r from-purple-900 to-blue-900 rounded-xl p-8 text-center">
+          <Wallet className="h-12 w-12 mx-auto mb-4 text-white" />
+          <h3 className="text-xl font-medium mb-2">Connect Wallet</h3>
+          <p className="text-gray-300 mb-6 max-w-md mx-auto">
+            Sign up to be notified when our first NFT collection drops. Connect your wallet to claim your spot.
+          </p>
+          <Button className="bg-white text-black hover:bg-gray-200 rounded-full px-8">
+            <Link className="h-4 w-4 mr-2" /> Connect Wallet
           </Button>
         </div>
       </div>
