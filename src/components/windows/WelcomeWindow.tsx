@@ -3,6 +3,20 @@ import { Button } from '@/components/ui/button';
 import { ShoppingCart, Phone } from 'lucide-react';
 
 const WelcomeWindow = () => {
+  const openShopWindow = () => {
+    const shopWindowButton = document.getElementById('shop-window-button');
+    if (shopWindowButton) {
+      shopWindowButton.click();
+    }
+  };
+
+  const openContactWindow = () => {
+    const contactWindowButton = document.getElementById('contact-window-button');
+    if (contactWindowButton) {
+      contactWindowButton.click();
+    }
+  };
+
   return (
     <div className="h-full flex flex-col items-center justify-center bg-white">
       <div className="text-center max-w-md px-6">
@@ -19,11 +33,7 @@ const WelcomeWindow = () => {
           <Button 
             variant="default" 
             className="bg-black hover:bg-gray-800 text-white font-medium py-2 px-8 rounded-full flex items-center justify-center gap-2"
-            onClick={() => {
-              // Find shop window and open it
-              const shopWindow = document.getElementById('shop-window-button');
-              if (shopWindow) shopWindow.click();
-            }}
+            onClick={openShopWindow}
           >
             <ShoppingCart className="h-4 w-4" />
             SHOP NOW
@@ -31,11 +41,7 @@ const WelcomeWindow = () => {
           <Button 
             variant="outline" 
             className="border border-black text-black hover:bg-gray-100 font-medium py-2 px-8 rounded-full flex items-center justify-center gap-2"
-            onClick={() => {
-              // Find contact window and open it
-              const contactWindow = document.getElementById('contact-window-button');
-              if (contactWindow) contactWindow.click();
-            }}
+            onClick={openContactWindow}
           >
             <Phone className="h-4 w-4" />
             CONTACT
