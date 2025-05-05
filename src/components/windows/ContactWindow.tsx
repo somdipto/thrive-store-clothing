@@ -1,40 +1,34 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-
 const ContactWindow = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Form submission logic would go here
     alert('Message sent! (This is a demo)');
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
   };
-
-  return (
-    <div className="h-full overflow-auto p-6 bg-white">
+  return <div className="h-full overflow-auto p-6 bg-white">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
-          <img 
-            src="/lovable-uploads/7b41f825-fde2-4b14-9a26-12f532c4be3f.png" 
-            alt="THRIVE Logo" 
-            className="h-6 w-6" 
-          />
-          <h2 className="text-xl font-medium text-gray-900">Contact PIXEL CHIC</h2>
+          <img src="/lovable-uploads/7b41f825-fde2-4b14-9a26-12f532c4be3f.png" alt="THRIVE Logo" className="h-6 w-6" />
+          <h2 className="text-xl font-medium text-gray-900">Contact THR!VE Store</h2>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8">
@@ -105,46 +99,20 @@ const ContactWindow = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="border-gray-300 focus:border-black focus:ring-black"
-                  required
-                />
+                <Input id="name" name="name" value={formData.name} onChange={handleChange} className="border-gray-300 focus:border-black focus:ring-black" required />
               </div>
               
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <Input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="border-gray-300 focus:border-black focus:ring-black"
-                  required
-                />
+                <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className="border-gray-300 focus:border-black focus:ring-black" required />
               </div>
               
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={5}
-                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black focus:border-black resize-none"
-                  required
-                ></textarea>
+                <textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={5} className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black focus:border-black resize-none" required></textarea>
               </div>
               
-              <Button
-                type="submit"
-                className="bg-black text-white hover:bg-gray-800 rounded-full w-full flex items-center justify-center gap-2 mt-2"
-              >
+              <Button type="submit" className="bg-black text-white hover:bg-gray-800 rounded-full w-full flex items-center justify-center gap-2 mt-2">
                 <Send className="h-4 w-4" />
                 Send Message
               </Button>
@@ -152,8 +120,6 @@ const ContactWindow = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ContactWindow;
